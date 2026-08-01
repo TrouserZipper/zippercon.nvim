@@ -4,7 +4,7 @@ return {
   -- tag = "v2.15", -- uncomment to pin to a specific release
   config = function()
     -- VimTeX configuration goes here, e.g.
-    vim.g.vimtex_view_method = 'skim'
+    vim.g.vimtex_view_method = 'zathura'
     vim.g.vimtex_comiler_method = 'latexmk'
   end,
   keys = {},
