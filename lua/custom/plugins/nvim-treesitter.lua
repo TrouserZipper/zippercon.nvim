@@ -11,9 +11,8 @@ return { -- Highlight, edit, and navigate code
     additional_vim_regex_highlighting = { 'ruby' },
   },
   indent = { enable = true, disable = { 'ruby' } },
-
   config = function()
-    require('nvim-treesitter').install { 'elixir' }
+    require('nvim-treesitter').install { 'elixir', 'latex', 'lua' }
   end,
 } -- There are additional nvim-treesitter modules that you can use to interact
 -- with nvim-treesitter. You should go explore a few and see what interests you:
