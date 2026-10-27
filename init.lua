@@ -7,6 +7,7 @@
     
   TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 --]]
+--
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -28,6 +29,7 @@ vim.g.have_nerd_font = true
 
 -- Make line numbers default
 vim.opt.relativenumber = true
+vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 -- vim.opt.relativenumber = true
@@ -145,6 +147,21 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
+
+-- Here, we install local LSPs
+vim.filetype.add {
+  extension = {
+    mlog = 'mlog',
+  },
+}
+
+vim.lsp.enable 'mlogls'
+
+vim.lsp.config('mlogls', {
+  cmd = { 'mlogls', '--stdio' },
+  filetypes = { 'mlog' },
+  single_file_support = true,
+})
 
 -- [[ Configure and install plugins ]]
 --
@@ -560,7 +577,6 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -853,6 +869,7 @@ require('lazy').setup({
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
+  --
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -874,6 +891,5 @@ require('lazy').setup({
     },
   },
 })
-
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
